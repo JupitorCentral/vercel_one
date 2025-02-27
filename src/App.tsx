@@ -1,7 +1,15 @@
-import React from 'react';
+import React from "react";
+import { useState } from "react";
 
-const App: React.FC = () => {
-  return <h1>Hello, Vite + React + TS!</h1>;
-};
+        
+function App() {
+    const Hello: React.FC = () => (
+        <div>
+            <p>Hello, Vite + React + TS!!!</p>
+        </div>
+    ); 
 
-export default App;
+    return <Hello />;
+  }
+  
+  export default App 

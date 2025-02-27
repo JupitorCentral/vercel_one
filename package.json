@@ -2,17 +2,17 @@
   "name": "vercel_one",
   "version": "1.0.0",
   "description": "",
-  "main": "hello.js",
+  "main": "/src/main.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "serve": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "npm": "^11.1.0",
     "react": "^19.0.0",
@@ -21,7 +21,9 @@
   "devDependencies": {
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@vercel/node": "^5.1.9",
     "@vitejs/plugin-react": "^4.3.4",
+    "better-npm-audit": "^3.11.0",
     "typescript": "^5.7.3",
     "vite": "^6.2.0"
   }
