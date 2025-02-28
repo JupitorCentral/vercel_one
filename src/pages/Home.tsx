@@ -17,16 +17,38 @@ interface HelloResponse {
  * 재사용 가능한 컴포넌트들을 활용하여 구성됩니다
  */
 const Home: React.FC = () => {
-  const { data, error, isLoading, fetchData } = useApi<HelloResponse>('/api/hello');
+  // api/hello 엔드포인트에서 데이터를 가져오기 위한 useApi 훅
+  const { data: helloData, error: helloError, isLoading: isHelloLoading, fetchData: fetchHelloData } = useApi<HelloResponse>('/api/hello');
+  // api/express_test 엔드포인트에서 데이터를 가져오기 위한 useApi 훅
+  const { data: expressTestData, error: expressTestError, isLoading: isExpressTestLoading, fetchData: fetchExpressTestData } = useApi<HelloResponse>('/api/express_test');
 
   return (
     <Layout title="Home Page">
+      
+      {/* Navigation Section: First Service 페이지로 이동하는 NavLink */}
       <NavLink to="/first-service">Go to First Service</NavLink>
-      <Button onClick={fetchData} isLoading={isLoading}>
-        Call API
+      
+      {/* API Call Section: /api/hello 호출 버튼 */}
+      <Button onClick={fetchHelloData} isLoading={isHelloLoading}>
+        Call Hello API
       </Button>
-      {data && <p>{data.message}</p>}
-      {error && <p className="error-message">{error}</p>}
+
+      {/* Data Display Section: /api/hello 응답 메시지 표시 */}
+      {helloData && <p>Hello API Response: {helloData.message}</p>}
+
+      {/* Error Display Section: /api/hello 에러 메시지 표시 */}
+      {helloError && <p className="error-message">Hello API Error: {helloError}</p>}
+
+      {/* API Call Section: /api/express_test 호출 버튼 */}
+      <Button onClick={fetchExpressTestData} isLoading={isExpressTestLoading}>
+        Call Express Test API
+      </Button>
+
+      {/* Data Display Section: /api/express_test 응답 메시지 표시 */}
+      {expressTestData && <p>Express Test API Response: {expressTestData.message}</p>}
+
+      {/* Error Display Section: /api/express_test 에러 메시지 표시 */}
+      {expressTestError && <p className="error-message">Express Test API Error: {expressTestError}</p>}
     </Layout>
   );
 };
