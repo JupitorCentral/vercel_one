@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import Layout from '../components/Layout.js';
+import NavLink from '../components/NavLink.js';
+import Button from '../components/Button.js';
+import useApi from '../hooks/useApi.js';
 
+/**
+ * API 응답 메시지의 형식을 정의하는 인터페이스
+ * @property {string} message - API에서 반환되는 메시지 텍스트
+ */
+interface HelloResponse {
+  message: string;
+}
+
+/**
+ * 홈 페이지 컴포넌트
+ * 재사용 가능한 컴포넌트들을 활용하여 구성됩니다
+ */
 const Home: React.FC = () => {
-  const [apiMessage, setApiMessage] = useState<string | null>(null);
-
-  const callApi = async () => {
-    try {
-      const response = await fetch('/api/hello');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      setApiMessage(data.message);
-    } catch (error) {
-      console.error("Could not fetch API:", error);
-      setApiMessage("Failed to load message from API");
-    }
-  };
-
+  const { data, error, isLoading, fetchData } = useApi<HelloResponse>('/api/hello');
 
   return (
-    <div>
-      <h1>Home Page</h1>
-      <Link to="/first-service">
-        <button>Go to First Service</button>
-      </Link>
-      <button onClick={callApi}>Call API</button>
-      {apiMessage && <p>{apiMessage}</p>}
-    </div>
+    <Layout title="Home Page">
+      <NavLink to="/first-service">Go to First Service</NavLink>
+      <Button onClick={fetchData} isLoading={isLoading}>
+        Call API
+      </Button>
+      {data && <p>{data.message}</p>}
+      {error && <p className="error-message">{error}</p>}
+    </Layout>
   );
 };
 
