@@ -27,7 +27,10 @@ const Home: React.FC = () => {
     <Layout title="Home Page">
       
       {/* Navigation Section: First Service 페이지로 이동하는 NavLink */}
-      <NavLink to="/FirstService/First.Service">Go to First Service</NavLink>
+      <NavLink to="/FirstService/first.service">Go to First Service</NavLink>
+
+      {/* Navigation Section: Client-Only 페이지로 이동하는 NavLink */}
+      <NavLink to="/client-only" variant="secondary">Go to Client-Only Page</NavLink>
       
       {/* API Call Section: /api/hello 호출 버튼 */}
       <Button onClick={fetchHelloData} isLoading={isHelloLoading}>
