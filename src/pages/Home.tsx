@@ -15,6 +15,7 @@ interface HelloResponse {
 /**
  * 홈 페이지 컴포넌트
  * 재사용 가능한 컴포넌트들을 활용하여 구성됩니다
+ * vite-plugin-ssr 라우팅 시스템에 맞게 구현되었습니다
  */
 const Home: React.FC = () => {
   // api/hello 엔드포인트에서 데이터를 가져오기 위한 useApi 훅
@@ -26,7 +27,7 @@ const Home: React.FC = () => {
     <Layout title="Home Page">
       
       {/* Navigation Section: First Service 페이지로 이동하는 NavLink */}
-      <NavLink to="/first-service">Go to First Service</NavLink>
+      <NavLink to="/FirstService/First.Service">Go to First Service</NavLink>
       
       {/* API Call Section: /api/hello 호출 버튼 */}
       <Button onClick={fetchHelloData} isLoading={isHelloLoading}>
@@ -51,6 +52,12 @@ const Home: React.FC = () => {
       {expressTestError && <p className="error-message">Express Test API Error: {expressTestError}</p>}
     </Layout>
   );
+};
+
+// vite-plugin-ssr에서 사용할 메타데이터 정의
+export const documentProps = {
+  title: 'Home Page',
+  description: 'Welcome to our application home page'
 };
 
 export default Home; 

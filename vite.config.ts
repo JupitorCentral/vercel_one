@@ -1,19 +1,19 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import ssr from 'vite-plugin-ssr/plugin';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    ssr()
+  ],
+  build: {
+    ssr: true
+  },
   server: {
-    port: 5173, // 원하는 포트 (기본 5173)
+    port: 5173,
     proxy: {
       "/api": "http://localhost:3000"
-    }
-  },
-  build: {
-    rollupOptions: {
-      input: {
-        main: './index.html'
-      }
     }
   }
 });
